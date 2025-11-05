@@ -4,132 +4,6 @@
 
 
 
-Python
-python
-def combinations(n, k):
-    """
-    Генерирует все сочетания размера k из n элементов
-    """
-    result = []
-    
-    def backtrack(start, current_comb):
-        # Базовый случай: достигли нужного размера сочетания
-        if len(current_comb) == k:
-            result.append(current_comb.copy())
-            return
-        
-        # Рекурсивный случай: добавляем новые элементы
-        for i in range(start, n + 1):
-            current_comb.append(i)
-            backtrack(i + 1, current_comb)  # i+1 гарантирует уникальность
-            current_comb.pop()  # backtracking
-    
-    backtrack(1, [])
-    return result
-
-# Пример использования
-if __name__ == "__main__":
-    n = 4
-    k = 2
-    print(f"Сочетания из {n} по {k}:")
-    for comb in combinations(n, k):
-        print(comb)
-
-
-
-
-
-
-Java
-java
-import java.util.ArrayList;
-import java.util.List;
-
-public class Combinations {
-    
-    public static List<List<Integer>> combinations(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
-        backtrack(1, n, k, new ArrayList<>(), result);
-        return result;
-    }
-    
-    private static void backtrack(int start, int n, int k, 
-                                 List<Integer> currentComb, 
-                                 List<List<Integer>> result) {
-        // Базовый случай: достигли нужного размера сочетания
-        if (currentComb.size() == k) {
-            result.add(new ArrayList<>(currentComb));
-            return;
-        }
-        
-        // Рекурсивный случай: добавляем новые элементы
-        for (int i = start; i <= n; i++) {
-            currentComb.add(i);
-            backtrack(i + 1, n, k, currentComb, result);  // i+1 гарантирует уникальность
-            currentComb.remove(currentComb.size() - 1);  // backtracking
-        }
-    }
-    
-    public static void main(String[] args) {
-        int n = 4;
-        int k = 2;
-        System.out.println("Сочетания из " + n + " по " + k + ":");
-        List<List<Integer>> combs = combinations(n, k);
-        for (List<Integer> comb : combs) {
-            System.out.println(comb);
-        }
-    }
-}
-
-
-
-
-C++
-cpp
-#include <iostream>
-#include <vector>
-using namespace std;
-
-void backtrack(int start, int n, int k, vector<int>& currentComb, vector<vector<int>>& result) {
-    // Базовый случай: достигли нужного размера сочетания
-    if (currentComb.size() == k) {
-        result.push_back(currentComb);
-        return;
-    }
-    
-    // Рекурсивный случай: добавляем новые элементы
-    for (int i = start; i <= n; i++) {
-        currentComb.push_back(i);
-        backtrack(i + 1, n, k, currentComb, result);  // i+1 гарантирует уникальность
-        currentComb.pop_back();  // backtracking
-    }
-}
-
-vector<vector<int>> combinations(int n, int k) {
-    vector<vector<int>> result;
-    vector<int> currentComb;
-    backtrack(1, n, k, currentComb, result);
-    return result;
-}
-
-int main() {
-    int n = 4;
-    int k = 2;
-    cout << "Сочетания из " << n << " по " << k << ":" << endl;
-    vector<vector<int>> combs = combinations(n, k);
-    for (auto comb : combs) {
-        for (int num : comb) {
-            cout << num << " ";
-        }
-        cout << endl;
-    }
-    return 0;
-}
-
-
-
-
-
 Алгоритм работы
 Принцип работы (на примере Python кода)
 
@@ -183,6 +57,12 @@ backtrack(1, [])
 start = 1 - начинаем с первого элемента
 [] - пустое начальное сочетание
 
+
+
+
+
+
+
 Временная сложность
 Общая сложность: O(C(n,k) × k)
 Объяснение
@@ -191,8 +71,15 @@ start = 1 - начинаем с первого элемента
 Общая сложность: O(C(n,k) × k)
 
 
+
+
+
+
+
 Примеры ввода-вывода
+
 Пример 1
+python
 Ввод:
 n = 4, k = 2
 Вывод:
@@ -206,6 +93,7 @@ n = 4, k = 2
 
 
 Пример 2
+java
 Ввод:
 n = 3, k = 1
 Вывод:
@@ -217,6 +105,7 @@ n = 3, k = 1
 
 
 Пример 3
+c++
 Ввод:
 n = 5, k = 3
 Вывод:
@@ -231,3 +120,18 @@ n = 5, k = 3
 [2, 3, 5]
 [2, 4, 5]
 [3, 4, 5]
+
+
+
+
+
+
+
+Ответ на вопрос 9: Чем отличаются перестановки от сочетаний?
+Перестановки (permutations) - это упорядоченные наборы элементов, где важен порядок следования.
+Сочетания (combinations) - это неупорядоченные наборы элементов, где порядок не имеет значения.
+Пример:
+Для множества {A,B,C}:
+Перестановки размера 2: AB, AC, BA, BC, CA, CB (6 вариантов)
+Сочетания размера 2: AB, AC, BC (3 варианта)
+В сочетаниях AB и BA считаются одинаковыми, в перестановках - разными.
